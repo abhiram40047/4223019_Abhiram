@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+static int find_ways(const int *arr, int len, int target_sum, int segment_len) {
+    if (segment_len > len || segment_len <= 0) return 0;
+    
+    int count = 0, sum = 0;
+    
+    for (int i=0;i<segment_len; ++i){
+        sum += arr[i];
+    }
+    if (sum == target_sum) count ++;
+    
+    for (int i =segment_len; i <len; ++i) {
+        sum += arr[i] - arr[i -segment_len];
+        if (sum == target_sum) count++;
+    }
+    return count;
+}
+
+int main(void) {
+    int size;
+    if(scanf("%d",&size) !=1) return 0;
+    
+    int *numbers = malloc(size * sizeof *numbers);
+    if(!numbers) return 0;
+    
+    for (int i=0;i<size;++i){
+        scanf("%d",&numbers[i]);
+    }
+    
+    int day, month;
+    scanf("%d %d",&day, &month);
+    
+    printf("%d\n",find_ways(numbers, size, day,month));
+    
+    free(numbers);
+    return 0;
+}

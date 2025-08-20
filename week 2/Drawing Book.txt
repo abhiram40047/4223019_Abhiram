@@ -1,0 +1,19 @@
+#include<stdio.h>
+
+int minTurns(int bookpages, int desiredPage){
+    int flipsFromStart = desiredPage / 2;
+    
+    int flipsFromEnd = (bookpages / 2) - (desiredPage / 2);
+    
+    return (flipsFromStart < flipsFromEnd) ? flipsFromStart : flipsFromEnd;
+}
+int main(){
+    int pages, target;
+    scanf("%d", &pages);
+    scanf("%d", &target);
+    
+    int answer = minTurns(pages,target);
+    printf("%d\n",answer);
+    
+    return 0;
+}

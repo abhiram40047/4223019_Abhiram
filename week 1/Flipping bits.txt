@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<stdint.h>
+
+unsigned int invertBits32(unsigned int inputNum) {
+    return inputNum ^ 0xFFFFFFFF;
+}
+
+int main(){
+    int totalTests;
+    scanf("%d", &totalTests);
+    
+    for(int testIndex = 0; testIndex < totalTests; testIndex++){
+        unsigned int currentValue;
+        scanf("%u",&currentValue);
+        printf("%u\n", invertBits32(currentValue));
+    }
+    
+    return 0;
+}

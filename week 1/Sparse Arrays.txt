@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_ITEMS 1000
+#define WORD_LIMIT 101
+
+int main() {
+    int numInputs, numLookups;
+    char dataList[MAX_ITEMS][WORD_LIMIT];
+    char searchList[MAX_ITEMS][WORD_LIMIT];
+    int matchCounts[MAX_ITEMS] = {0};
+
+    scanf("%d", &numInputs);
+    for (int index = 0; index < numInputs; index++) {
+        scanf("%s", dataList[index]);
+    }
+
+    scanf("%d", &numLookups);
+    for (int k = 0; k < numLookups; k++) {
+        scanf("%s", searchList[k]);
+    }
+
+    for (int m = 0; m < numLookups; m++) {
+        for (int n = 0; n < numInputs; n++) {
+            if (strcmp(searchList[m], dataList[n]) == 0) {
+                matchCounts[m]++;
+            }
+        }
+    }
+    for (int p = 0; p < numLookups; p++) {
+        printf("%d\n", matchCounts[p]);
+    }
+
+    return 0;
+}

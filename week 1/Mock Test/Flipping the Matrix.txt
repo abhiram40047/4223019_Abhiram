@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int cases;
+    if (scanf("%d", &cases) != 1) return 0;
+
+    while (cases--) {
+        int half;
+        scanf("%d", &half);
+        int dim = 2 * half;
+
+        int *grid = (int *)malloc(dim * dim * sizeof(int));
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
+                scanf("%d", &grid[i * dim + j]);
+            }
+        }
+
+        long long ans = 0;
+        for (int i = 0; i < half; i++) {
+            for (int j = 0; j < half; j++) {
+                int v1 = grid[i * dim + j];
+                int v2 = grid[i * dim + (dim - 1 - j)];
+                int v3 = grid[(dim - 1 - i) * dim + j];
+                int v4 = grid[(dim - 1 - i) * dim + (dim - 1 - j)];
+
+                int mx = v1;
+                if (v2 > mx) mx = v2;
+                if (v3 > mx) mx = v3;
+                if (v4 > mx) mx = v4;
+
+                ans += mx;
+            }
+        }
+
+        printf("%lld\n", ans);
+        free(grid);
+    }
+
+    return 0;
+}

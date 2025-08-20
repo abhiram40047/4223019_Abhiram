@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+static int comparecolors(const void *p, const void *q){
+    int left = *(const int *)p;
+    int right = *(const int *)q;
+    return (left > right) - (left < right);
+}
+
+int countpairs(int total, int *arr) {
+    qsort(arr,total, sizeof(int), comparecolors);
+    
+    int paircount = 0;
+    for(int idx = 0; idx < total;){
+        if(idx + 1 <total && arr[idx] == arr[idx + 1]){
+            paircount++;
+            idx += 2;
+        } else {
+            idx++;
+        }
+    }
+    return paircount;
+}
+
+int main(void) {
+    int size;
+    if (scanf("%d", &size) !=1) return 0;
+    
+    int *sockcolors = (int *) malloc(size * sizeof(int));
+    for (int k=0;k<size;k++){
+        scanf("%d",&sockcolors[k]);
+    }
+    
+    int answer = countpairs(size,sockcolors);
+    printf("%d\n",answer);
+    
+    free(sockcolors);
+    return 0;
+}

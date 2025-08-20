@@ -1,0 +1,21 @@
+#include<stdio.h>
+
+int findwinner(int totalTowers, int towerHeight) {
+    if(towerHeight == 1)
+      return 2;
+    return(totalTowers % 2 == 0) ? 2:1;
+}
+
+int main() {
+    int testCases;
+    scanf("%d",&testCases);
+    
+    while(testCases--){
+        int numTowers, initHeight;
+        scanf("%d %d",&numTowers,&initHeight);
+        
+        int winner = findwinner(numTowers, initHeight);
+        printf("%d\n",winner);
+    }
+    return 0;
+}

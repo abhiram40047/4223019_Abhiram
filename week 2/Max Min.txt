@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int sortHelper(const void *x, const void *y) {
+    return (*(int*)x - *(int*)y);
+}
+
+int findMinUnfairness(int data[],int size, int groupSize) {
+    qsort(data, size, sizeof(int), sortHelper);
+
+    int best= data[groupSize - 1] - data[0]; 
+
+    for (int i = 1; i <= size - groupSize; i++) {
+        int current = data[i + groupSize - 1] - data[i];
+        if (current < best) {
+            best = current;
+        }
+    }
+
+    return best;
+}
+
+int main() {
+    int total, subset;
+    scanf("%d", &total);
+    scanf("%d", &subset);
+
+    int numbers[total];
+    for (int i = 0; i < total; i++) {
+        scanf("%d", &numbers[i]);
+    }
+
+    int answer = findMinUnfairness(numbers,total,subset);
+    printf("%d\n", answer);
+
+    return 0;
+}
