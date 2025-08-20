@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <string.h>
+
+void findXor(const char *strA, const char *strB, char *ans) {
+    int len = strlen(strA);
+    for (int idx = 0; idx < len; idx++) {
+        ans[idx] = (strA[idx] == strB[idx]) ? '0' : '1';
+    }
+    ans[len] = '\0';   
+}
+
+int main() {
+    char binary1[110], binary2[110], xorResult[110];
+
+    scanf("%109s", binary1);
+    scanf("%109s", binary2);
+
+    findXor(binary1, binary2, xorResult);
+
+    printf("%s\n", xorResult);
+    return 0;
+}

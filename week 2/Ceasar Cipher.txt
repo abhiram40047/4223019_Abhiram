@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void encryptCaesar(char input[], int key) {
+    int idx;
+    int size = strlen(input);
+
+    key = key % 26;
+
+    for (idx = 0; idx < size; idx++) {
+        char c = input[idx];
+
+        if (isalpha(c)) {
+            if (isupper(c)) {
+                input[idx] = ((c - 'A' + key) % 26) + 'A';
+            }
+            else if (islower(c)) {
+                input[idx] = ((c - 'a' + key) % 26) + 'a';
+            }
+        }
+    }
+}
+
+int main() {
+    int strLen, shiftValue;
+    scanf("%d", &strLen);
+
+    char plainText[1000];
+    scanf("%s", plainText);
+
+    scanf("%d", &shiftValue);
+
+    encryptCaesar(plainText, shiftValue);
+    printf("%s\n", plainText);
+
+    return 0;
+}

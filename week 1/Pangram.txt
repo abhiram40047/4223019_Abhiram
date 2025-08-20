@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<ctype.h>
+
+#define ALL_LETTERS_MASK ((1u << 26) - 1u)
+
+const char* is_pangram(const char *line){
+    unsigned int seen_mask = 0;
+    
+    for (const unsigned char *ptr = (const unsigned char*)line; *ptr; ++ptr) {
+        if (isalpha(*ptr)){
+            unsigned int bit = (unsigned int)(tolower(*ptr) - 'a');
+            if (bit < 26){
+                seen_mask |= (1u <<bit);
+            }
+        }
+    }
+    
+    return (seen_mask == ALL_LETTERS_MASK) ? "pangram" : "not pangram";
+}
+int main(void) {
+    char buffer[1024];
+    
+    if (fgets(buffer, sizeof buffer, stdin)){
+        for (char *p = buffer; *p; ++p){
+            if (*p == '\n') { *p = '\0'; break;}
+        }
+        puts(is_pangram(buffer));
+    }
+    
+    return 0;
+}

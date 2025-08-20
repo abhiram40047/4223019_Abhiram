@@ -1,0 +1,26 @@
+#include<stdio.h>
+
+#define SIZE_LIMIT 100
+
+int main(){
+    int totalCount;
+    scanf("%d", &totalCount);
+    
+    int counter[SIZE_LIMIT] = {0};
+    
+    for (int idx = 0; idx <totalCount; idx++){
+        int currentNum;
+        scanf("%d",&currentNum);
+        counter[currentNum]++;
+    }
+    for (int pos = 0; pos <SIZE_LIMIT;pos++){
+        printf("%d",counter[pos]);
+        if (pos != SIZE_LIMIT - 1){
+            printf(" ");
+        }
+    }
+    printf("\n");
+    
+    return 0;
+}
+

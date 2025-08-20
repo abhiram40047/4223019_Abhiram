@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+static int cmp(const void *a, const void *b) {
+    int x = *(const int*)a, y = *(const int*)b;
+    return (x > y) - (x < y);
+}
+
+int main(void) {
+    int q; 
+    if (scanf("%d", &q) != 1) return 0;
+
+    while (q--) {
+        int n, k;
+        scanf("%d %d", &n, &k);
+
+        int *a = malloc(sizeof(int)*n);
+        int *b = malloc(sizeof(int)*n);
+        if (!a || !b) return 0;
+
+        for (int i = 0; i < n; ++i) scanf("%d", &a[i]);
+        for (int i = 0; i < n; ++i) scanf("%d", &b[i]);
+
+        qsort(a, n, sizeof(int), cmp);
+        qsort(b, n, sizeof(int), cmp);
+
+        int ok = 1;
+        for (int i = 0; i < n; ++i) {
+            if (a[i] + b[n - 1 - i] < k) { ok = 0; break; }
+        }
+        puts(ok ? "YES" : "NO");
+
+        free(a); free(b);
+    }
+    return 0;
+}

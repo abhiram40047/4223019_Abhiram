@@ -1,0 +1,26 @@
+#include<stdio.h>
+
+int getUniqueElement(int data[] ,int length) {
+    int singleElement = 0;
+    
+    for (int idx = 0; idx < length; idx++) {
+        singleElement ^= data[idx];
+    }
+    
+    return singleElement;
+}
+
+int main(){
+    int totalCount;
+    scanf("%d", &totalCount);
+    
+    int values[totalCount];
+    for (int pos = 0;pos < totalCount; pos++) {
+        scanf("%d", &values[pos]);
+    }
+    
+    int uniqueNum = getUniqueElement(values, totalCount);
+    printf("%d\n", uniqueNum);
+    
+    return 0;
+}

@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <limits.h>
+
+void computeSumRange(int nums[], int count) {
+    long long grandTotal = 0;
+    int minimum = INT_MAX;
+    int maximum = INT_MIN;
+
+    for (int idx = 0; idx < count; idx++) {
+        int number = nums[idx];
+        grandTotal += number;
+
+        if (number < minimum) {
+            minimum = number;
+        }
+
+        if (number > maximum) {
+            maximum = number;
+        }
+    }
+
+    long long minPossible = grandTotal - maximum;
+    long long maxPossible = grandTotal - minimum;
+
+    printf("%lld ", minPossible);
+    printf("%lld ", maxPossible);
+}
+
+int main() {
+    int dataSet[5];
+
+    printf("");
+    for (int pos = 0; pos < 5; pos++) {
+        scanf("%d", &dataSet[pos]);
+    }
+
+    computeSumRange(dataSet, 5);
+
+    return 0;
+}

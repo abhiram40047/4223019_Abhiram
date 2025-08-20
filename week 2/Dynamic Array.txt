@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int seqCount, queryCount;
+    if (scanf("%d %d", &seqCount, &queryCount) != 2) return 0;
+
+    int **sequences = (int **)calloc(seqCount, sizeof(int *));
+    int *lengths     = (int *)calloc(seqCount, sizeof(int));
+    int *capacities  = (int *)calloc(seqCount, sizeof(int));
+
+    int lastAns = 0;
+
+    for (int q = 0; q < queryCount; q++) {
+        int typ, x, y;
+        scanf("%d %d %d", &typ, &x, &y);
+
+        int idx = (x ^ lastAns) % seqCount;
+
+        if (typ == 1) {
+            if (lengths[idx] == capacities[idx]) {
+                capacities[idx] = capacities[idx] ? capacities[idx] * 2 : 2;
+                sequences[idx] = (int *)realloc(sequences[idx],
+                                                capacities[idx] * sizeof(int));
+            }
+            sequences[idx][lengths[idx]++] = y;
+        } else { // typ == 2
+            int pos = y % lengths[idx];      
+            lastAns = sequences[idx][pos];
+            printf("%d\n", lastAns);
+        }
+    }
+
+    for (int i = 0; i < seqCount; i++) free(sequences[i]);
+    free(sequences);
+    free(lengths);
+    free(capacities);
+    return 0;
+}

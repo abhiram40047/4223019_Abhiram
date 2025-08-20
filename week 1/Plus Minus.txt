@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+void calculateRatios(int numbers[], int size) {
+    int positive = 0, negative = 0, zero = 0;
+
+    for (int i = 0; i < size; i++) {
+        if (numbers[i] > 0)
+            positive++;
+        else if (numbers[i] < 0)
+            negative++;
+        else
+            zero++;
+    }
+
+    printf("%.6lf\n", (double)positive / size);
+    printf("%.6lf\n", (double)negative / size);
+    printf("%.6lf\n", (double)zero / size);
+}
+
+int main() {
+    int totalElements;
+    scanf("%d", &totalElements);
+
+    int inputArray[totalElements];
+
+    for (int i = 0; i < totalElements; i++) {
+        scanf("%d", &inputArray[i]);
+    }
+
+    calculateRatios(inputArray, totalElements);
+    return 0;
+}

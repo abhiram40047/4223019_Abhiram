@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main() {
+    int size;
+    scanf("%d",&size);
+    
+    int grid[size][size];
+    int mainDiagonalsum = 0, antiDiagonalsum = 0;
+    
+    for(int r=0;r<size;r++){
+        for(int c=0;c<size;c++){
+            scanf("%d",&grid[r][c]);
+            if (r==c){
+                mainDiagonalsum +=grid[r][c];
+            }
+            if (r + c ==size - 1){
+                antiDiagonalsum +=grid[r][c];
+            }
+        }
+    }
+    int absDifference = abs(mainDiagonalsum - antiDiagonalsum);
+    printf("%d\n",absDifference);
+    
+    return 0;
+}
